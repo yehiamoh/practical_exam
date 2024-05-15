@@ -1,3 +1,5 @@
+using System.Data.Common;
+
 namespace practical_exam
 {
     public partial class Form1 : Form
@@ -132,6 +134,54 @@ namespace practical_exam
                 }
             }
             MessageBox.Show("user not found");
+
+        }
+
+        private void deleteBtn_Click(object sender, EventArgs e)
+        {
+            firstName.Text=LastName.Text = balance.Text=null ;
+            fileStream.Seek(0, SeekOrigin.Begin);
+            fileStream.Flush();
+            writer.Flush();
+
+            String record;
+            String[] fields;
+            int steps = 0;
+            int id = int.Parse(ID.Text);
+            while((record = reader.ReadLine()) != null)
+            {
+                fields= record.Split(",");
+                if (id == int.Parse(fields[0]))
+                {
+                    fileStream.Seek(steps, SeekOrigin.Begin);
+                    writer.Write("*");
+                    writer.Flush();
+                    MessageBox.Show("record deleted ");
+                }
+                steps += record.Length + 2;
+            }
+        }
+
+        private void squezzeBtn_Click(object sender, EventArgs e)
+        {
+            String record;
+            fileStream.Seek(0,SeekOrigin.Begin);
+            FileStream SqueezeFileStream=new FileStream("squezzedfile.txt",FileMode.Create,FileAccess.Write);
+            StreamWriter SqueezeWriter= new StreamWriter(SqueezeFileStream);
+            while ((record=reader.ReadLine())!=null) 
+            {
+                if (record[0] != '*')
+                {
+                    SqueezeWriter.WriteLine(record);
+                    SqueezeWriter.Flush();
+                   
+                }
+                
+                
+            }
+            SqueezeWriter.Close();
+            SqueezeFileStream.Close();
+            MessageBox.Show("Squezed succesfully");
 
         }
     }

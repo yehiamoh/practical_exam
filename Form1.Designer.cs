@@ -170,6 +170,7 @@
             this.deleteBtn.TabIndex = 12;
             this.deleteBtn.Text = "delete record";
             this.deleteBtn.UseVisualStyleBackColor = true;
+            this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
             // squezzeBtn
             // 
@@ -180,6 +181,7 @@
             this.squezzeBtn.TabIndex = 13;
             this.squezzeBtn.Text = "squeeze File";
             this.squezzeBtn.UseVisualStyleBackColor = true;
+            this.squezzeBtn.Click += new System.EventHandler(this.squezzeBtn_Click);
             // 
             // clearFomBtn
             // 
